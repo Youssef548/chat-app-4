@@ -1,2 +1,2 @@
 # chat-app-4
-chat app socail media
+chat app social media
