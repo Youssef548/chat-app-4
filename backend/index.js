@@ -45,7 +45,7 @@ app.use(passport.session())
 app.use(homeRouter)
 
 async function bootstrap() {
-    await mongoose.connect(process.env.DB_STRING,{useNewUrlParser: true,useUnifiedTopology: true,});
+    mongoose.connect(process.env.DB_STRING,{useNewUrlParser: true,useUnifiedTopology: true,});
     app.listen(port, () => {
         console.log(`localhost:${port}`)
     })

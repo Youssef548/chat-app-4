@@ -26,9 +26,10 @@ class authController {
       userdata.username= username
       userdata.password= password
       let data = await userdata.save()
-      res.send(data);
+ 
+      res.send(200);
     }else{
-      res.send({type:"error",message:"username already taken",data});
+      res.status(400).send({type:"error",message:"username already taken"});
     }
   };
 
