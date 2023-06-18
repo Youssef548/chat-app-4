@@ -1,9 +1,9 @@
 import { Router } from "express";
-import HomeController from "../controllers/home.controller.js";
+import authRouter from "./auth.route.js"
 const router = Router()
 
+router.use("/auth",authRouter)
 
-router.get("/",HomeController.index)
 
 
 export default router
