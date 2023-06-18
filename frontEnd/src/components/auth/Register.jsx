@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //import axios from 'axios';
 import { axiosInstance } from '../../config/axios';
 
 export const Register = () => {
-  const [email, setEmail] = useState('');
+  const navigateTo = useNavigate();
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Perform form submission logic here
-    const data = { email, password };
+    const data = { username, password };
 
     try {
       const res = await axiosInstance.post('auth/register', data);
       if (res.status === 200) {
-        // restore and go to Login with useContext
-        // Succufull
+        navigateTo('/login');
         console.log('SUCCESSS');
-      } else if (res.status === 400) {
-        //{type:"error",message:"username already taken"} if already taken
-        console.log('FAILED');
       }
     } catch (error) {
-      console.log('ERROR', error);
+      console.log('ERROR', error.response.data.message);
     }
 
     setPassword('');
-    setEmail('');
+    setUsername('');
   };
 
   return (
@@ -40,10 +37,10 @@ export const Register = () => {
           Email:
         </label>
         <input
-          type='email'
+          type='name'
           id='email'
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
           className='w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
         />
       </div>
