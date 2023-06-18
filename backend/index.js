@@ -3,6 +3,9 @@ import homeRouter from "./routes/home.router.js"
 
 import mongoose from "mongoose"
 
+
+import passport from './config/passport.js'
+
 import session from "express-session"
 import MongoStore from 'connect-mongo'
 
@@ -24,7 +27,7 @@ mongoose.set('debug', true);
 app.use(express.json())
 
 app.use(cors({
-    origin: "http://localhost:3500",
+    origin: process.env.CLIENT_URL,
     credentials: true
 }))
 app.use(session({
@@ -33,8 +36,12 @@ app.use(session({
     saveUninitialized: true,
     store: MongoStore.create({ 
         mongoUrl:process.env.DB_STRING
-     })
+    })
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(homeRouter)
 
 async function bootstrap() {

@@ -1,26 +1,20 @@
+import passport from "passport";
 import userModel from "../models/user.model.js";
 
 class authController {
-  static loginGet(req, res) {
-    res.send("login");
-  };
-  static loginPost(req, res) {
-    res.send("login");
-  };
-  static async registerGet(req, res) {
-    const { username, password } = req.body
-    const data = await userModel.findOne({ username})
-    if (data == null) {
-      console.log("ez");
-      const userdata = new userModel({
-        username, password
-      })
-      let data = await userdata.save()
-      res.send(data);
-    }else{
-      res.send({type:"error",message:"username already taken"});
-    }
-    
+  static async loginPost(req, res,next) {
+    passport.authenticate("local",(err,user,info)=>{
+      if(err) throw err 
+      if(!user) res.send("user don't exisit")
+      else{
+        req.logIn(user,err=>{
+          if(err) throw err
+          res.send("Sucssfuly authed")
+          console.log(req.user);
+        })
+      }
+      
+    })(req,res,next)
   };
   static async registerPost(req, res) {
     const { username, password } = req.body
