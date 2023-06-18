@@ -1,5 +1,9 @@
-import React from "react";
+import React from 'react';
 
 export const Login = () => {
-  return <></>;
+  return (
+    <>
+      <h1>Login</h1>
+    </>
+  );
 };

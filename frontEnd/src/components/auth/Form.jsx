@@ -1,9 +1,9 @@
-import React from "react";
-import { Login } from "./login";
-import { Register } from "./register";
+import React, { useState } from 'react';
+import { Login } from './login';
+import { Register } from './register';
 
 const Form = () => {
-  return <><h1>dsadsd</h1></>;
+  return <Register />;
 };
 
-export default Form
+export default Form;
