@@ -7,11 +7,32 @@ export const Register = () => {
   const navigateTo = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Perform form submission logic here
     const data = { username, password };
+
+    if (!username) {
+      setError('Username is required.');
+      console.log('VALIDATE ERROR');
+      return;
+    }
+
+    if (username.length < 3 || username.length > 20) {
+      setError('Username must be between 3 and 20 characters.');
+      console.log('VALIDATE ERROR');
+      return;
+    }
+    // Add additional validation rules for the username field, such as character restrictions and uniqueness
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      console.log('VALIDATE ERROR');
+      return;
+    }
+    // Add additional validation rules for the password field, such as password strength requirements
 
     try {
       const res = await axiosInstance.post('auth/register', data);
@@ -31,14 +52,14 @@ export const Register = () => {
     <form onSubmit={handleSubmit} className='max-w-md mx-auto'>
       <div className='mb-4'>
         <label
-          htmlFor='email'
+          htmlFor='name'
           className='block text-gray-700 text-sm font-bold mb-2'
         >
-          Email:
+          Name:
         </label>
         <input
           type='name'
-          id='email'
+          id='name'
           value={username}
           onChange={(event) => setUsername(event.target.value)}
           className='w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
