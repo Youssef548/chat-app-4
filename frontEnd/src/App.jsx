@@ -6,30 +6,29 @@ import { Route, Routes, Navigate } from 'react-router';
 import { Register } from './components/auth/register';
 import { Login } from './components/auth/Login';
 import { UserContext } from './context/Context';
-
-const PrivateRoute = ({ isLoggedIn, component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      isLoggedIn ? <Component {...props} /> : <Redirect to='/error' />
-    }
-  />
-);
+import PrivateRoute from './components/routing/PrivateRoute';
 
 const Home = () => {
+  const usr = useContext(UserContext);
+
+  const { isLoggedIn, setIsLoggedIn } = usr;
   if (!isLoggedIn) {
     return <Redirect to='/error' />;
   }
 
-  return <h1>Welcome to the Home page!</h1>;
+  return (
+    <>
+      <h1>Welcome to the Home page!</h1>
+      <Sidebar />
+      <Chat />;
+    </>
+  );
 };
 
 function App() {
   const usr = useContext(UserContext);
 
   const { isLoggedIn, setIsLoggedIn } = usr;
-  //const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const Error = () => <h1>Error: You are not logged in!</h1>;
 
   return (
     <>
@@ -39,8 +38,10 @@ function App() {
         <Route path='/register' element={!isLoggedIn && <Register />}></Route>
         <Route path='/login' element={<Login />} />
 
-        {/* <PrivateRoute isLoggedIn={isLoggedIn} path='/home' component={Home} /> */}
-        {/* <Route path='/error' component={Error} /> */}
+        <Route path='/home' element={<PrivateRoute />}>
+          <Route path='/home' element={<Home />} />
+        </Route>
+        <Route path='/error' component={Error} />
       </Routes>
 
       {/* <h1 className='text-3xl'>hi i am a css developer</h1>
