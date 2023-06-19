@@ -19,7 +19,7 @@ const port = 3000
 
 
 
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 
 
 

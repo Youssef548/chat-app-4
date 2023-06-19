@@ -19,10 +19,9 @@ passport.use(
 passport.serializeUser((user, cb) => {
     return cb(null, user.id)
 })
-passport.deserializeUser((user, cb) => {
-    userModel.findOne({ _id: user.id }, (err, user) => {
-        return cb(err, user)
-    })
+passport.deserializeUser(async (user, cb) => {
+    let usere  = await userModel.findOne({ _id: user })
+    return cb(null , usere)
 })
 
 
