@@ -9,8 +9,11 @@ import passport from './config/passport.js'
 import session from "express-session"
 import MongoStore from 'connect-mongo'
 
+import http from "http"
+
 import cors from "cors"
 import * as dotenv from 'dotenv'
+import createWsServer from './gateway/socketio.js'
 dotenv.config()
 
 const app = express()
@@ -19,8 +22,8 @@ const port = 3000
 
 
 
-mongoose.set('debug', true);
-
+// mongoose.set('debug', true);
+const server = http.createServer(app);
 
 
 
@@ -30,23 +33,27 @@ app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true
 }))
-app.use(session({
+
+const sessionMiddleware =session({
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     store: MongoStore.create({ 
         mongoUrl:process.env.DB_STRING
     })
-}))
+})
+
+app.use(sessionMiddleware)
 
 app.use(passport.initialize())
 app.use(passport.session())
 
+createWsServer(server,sessionMiddleware)
 app.use(homeRouter)
 
 async function bootstrap() {
     mongoose.connect(process.env.DB_STRING,{useNewUrlParser: true,useUnifiedTopology: true,});
-    app.listen(port, () => {
+    server.listen(port, () => {
         console.log(`localhost:${port}`)
     })
 } 
