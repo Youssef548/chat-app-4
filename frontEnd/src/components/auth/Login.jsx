@@ -38,14 +38,15 @@ export const Login = () => {
       if (res.data === 'Sucssfuly authed') {
         setIsLoggedIn(true);
         navigateTo('/home');
+        setPassword('');
+        setUsername('');
+      } else {
+        console.log('USER NOT FOUND');
       }
     } catch (error) {
       console.log(data);
       console.log('ERROR', error);
     }
-
-    setPassword('');
-    setUsername('');
   };
 
   return (

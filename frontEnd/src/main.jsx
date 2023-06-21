@@ -7,10 +7,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { UserContextProvider } from './context/Context.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserContextProvider>
-        <App />
-      </UserContextProvider>
-    </BrowserRouter>
+    <UserContextProvider>
+      <App />
+    </UserContextProvider>
   </React.StrictMode>
 );
