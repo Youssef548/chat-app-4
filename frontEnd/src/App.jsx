@@ -14,7 +14,7 @@ import Chat from './components/app';
 import { Register } from './components/auth/register';
 import { Login } from './components/auth/Login';
 import { UserContext, UserContextProvider } from './context/Context';
-import PrivateRoute from './components/routing/PrivateRoute';
+import PrivateRoute from './utils/PrivateRoute';
 import { createBrowserRouter } from 'react-router-dom';
 // import { AuthenticationPage } from './pages/Authentication';
 // import { action as AuthAction } from './pages/Authentication';
@@ -30,6 +30,10 @@ const router = createBrowserRouter([
         path: 'auth',
         element: <AuthenticationPage />,
         action: authAction,
+      },
+      {
+        path: 'dashboard',
+        element: <PrivateRoute />,
       },
     ],
   },

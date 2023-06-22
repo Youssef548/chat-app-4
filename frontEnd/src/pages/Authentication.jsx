@@ -33,6 +33,7 @@ export async function action({ request }) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(authData),
+    credentials: 'include',
   });
 
   if (response.status === 422 || response.status === 401) {
