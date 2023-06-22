@@ -1,8 +1,5 @@
-import React from "react";
-
+import React from 'react';
 
 export const Chatbox = () => {
-  return <>
-    Chatbox
-  </>;
+  return <div className='flex-grow'>Chatbox</div>;
 };

@@ -8,6 +8,7 @@ export const axiosInstance = axios.create({
     'Content-Type': 'application/json',
     // Add any additional headers you need
   },
+  withCredentials: true,
 });
 
 // Example of making a GET request using the custom Axios instance

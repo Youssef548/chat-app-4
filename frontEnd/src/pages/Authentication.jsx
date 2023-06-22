@@ -33,6 +33,7 @@ export async function action({ request }) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(authData),
+    credentials: 'include',
   });
 
   if (response.status === 422 || response.status === 401) {
@@ -44,7 +45,8 @@ export async function action({ request }) {
   }
 
   if (mode === 'login') {
-    return redirect('/');
+    return redirect('/dashboard');
+
   } else if (mode === 'signup') {
     return redirect('/auth?mode=login');
   }
