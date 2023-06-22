@@ -20,7 +20,7 @@ class authController {
   };
 
 
-  static async registerPost(req, res) {
+  static async signupPost(req, res) {
     const { username, password } = req.body
     const data = await userModel.findOne({ username})
     if (data == null) {
@@ -35,8 +35,13 @@ class authController {
     }
   };
 
-  static async check(req,res){
-    res.send(req.isAuthenticated())
+  static async validate(req,res){
+    if(!req.isAuthenticated()){
+
+      res.status(401).send({isAuthenticated :req.isAuthenticated()})
+      return
+    }
+    res.status(200).send({isAuthenticated :req.isAuthenticated()})
   }
 
 }
