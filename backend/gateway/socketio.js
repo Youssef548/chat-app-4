@@ -11,13 +11,17 @@ function createWsServer(app, sessionMiddleware) {
 
 
     io.use(wrap(sessionMiddleware));
-   
+
 
     io.on("connection", function (socket) {
-        let userId = socket.request.session.passport.user;
-        console.log(userId);
-        console.log(socket.id);
-        io.emit("helow manga", { manga: "ez" })
+        try {
+            let userId = socket.request.session.passport.user;
+            console.log(userId);
+            console.log(socket.id);
+            io.emit("helow manga", { manga: "ez" })
+        }catch(e){
+            console.log(e);
+        }
     });
 
 }
