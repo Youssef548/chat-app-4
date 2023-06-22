@@ -4,9 +4,9 @@ import { redirect } from 'react-router-dom';
 
 const AuthenticationPage = () => {
   return (
-    <div>
+    <>
       <AuthForm />
-    </div>
+    </>
   );
 };
 

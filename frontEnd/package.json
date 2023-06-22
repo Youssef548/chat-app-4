@@ -16,7 +16,9 @@
     "react-devtools-core": "^4.27.8",
     "react-dom": "^18.2.0",
     "react-router": "^6.13.0",
-    "react-router-dom": "^6.13.0"
+    "react-router-dom": "^6.13.0",
+    "socket.io": "^4.7.0",
+    "socket.io-client": "^4.7.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

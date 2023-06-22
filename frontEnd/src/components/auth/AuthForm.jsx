@@ -9,11 +9,8 @@ const AuthForm = () => {
   const [password, setPassword] = useState('');
 
   return (
-    <div className='h-screen flex flex-col justify-center'>
-      <div className='px-10 mx-auto flex-1'>
-        <div className='flex justify-center items-center'>
-        <div className='flex-1'>
-          <Form method='post' className='max-w-md mx-auto'>
+    <div className='h-screen flex flex-row justify-center items-center px-4 sm:px-6 lg:px-8'>
+      <Form method='post' className='max-w-md mx-auto basis-[70%]'>
         <div className='mb-4'>
           <label
             htmlFor='username'
@@ -57,12 +54,9 @@ const AuthForm = () => {
             {isLogin ? 'Create new user' : 'Login'}
           </Link>
         </p>
-            </Form>
-        </div>
-          <div className='flex-1'>
-            <img src='/login.svg' />
-          </div>
-        </div>
+      </Form>
+      <div className='flex-1 max-w-[550px]'>
+        <img src='/login.svg' />
       </div>
     </div>
   );
