@@ -45,7 +45,8 @@ export async function action({ request }) {
   }
 
   if (mode === 'login') {
-    return redirect('/');
+    return redirect('/dashboard');
+
   } else if (mode === 'signup') {
     return redirect('/auth?mode=login');
   }

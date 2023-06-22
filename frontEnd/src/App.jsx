@@ -9,15 +9,10 @@ import {
 } from 'react-router-dom';
 import { Sidebar } from './components/app/sidebar';
 import Chat from './components/app';
-// import Form from './components/auth/form';
 
-import { Register } from './components/auth/register';
-import { Login } from './components/auth/Login';
 import { UserContext, UserContextProvider } from './context/Context';
 import PrivateRoute from './utils/PrivateRoute';
 import { createBrowserRouter } from 'react-router-dom';
-// import { AuthenticationPage } from './pages/Authentication';
-// import { action as AuthAction } from './pages/Authentication';
 
 import { AuthenticationPage, HomePage, authAction } from './pages';
 

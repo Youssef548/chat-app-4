@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { axiosInstance } from '../config/axios';
+import DashboardPage from '../pages/Dashboard';
 
 const PrivateRoute = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -16,11 +17,9 @@ const PrivateRoute = () => {
           setIsLoggedIn(false);
         }
         setLoading(false);
-        console.log('SUCCESS');
       } catch (error) {
         setIsLoggedIn(false);
         setLoading(false);
-        console.log('Something went wrong', error);
       }
     };
 
@@ -31,9 +30,7 @@ const PrivateRoute = () => {
     return <div>Loading...</div>; // Render a loading state while fetching data
   }
 
-  console.log('from app.js', isLoggedIn);
-
-  return isLoggedIn ? <Outlet /> : <Navigate to='/auth' />;
+  return isLoggedIn ? <DashboardPage /> : <Navigate to='/auth' />;
 };
 
 export default PrivateRoute;
