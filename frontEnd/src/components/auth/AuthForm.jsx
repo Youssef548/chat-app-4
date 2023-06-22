@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// import { Login } from './login';
-// import { Register } from './register';
+
 import { Form, useSearchParams, Link } from 'react-router-dom';
 
 const AuthForm = () => {
