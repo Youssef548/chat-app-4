@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Form, useSearchParams, Link } from 'react-router-dom';
+import { Form, useSearchParams, Link, useActionData } from 'react-router-dom';
 
 const AuthForm = () => {
   const [searchParams] = useSearchParams('');
@@ -8,12 +8,17 @@ const AuthForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const data = useActionData();
+
   return (
-    <div className='h-screen flex flex-col justify-center'>
-      <div className='px-10 mx-auto flex-1'>
-        <div className='flex justify-center items-center'>
-        <div className='flex-1'>
-          <Form method='post' className='max-w-md mx-auto'>
+    <div className='h-screen flex flex-row justify-center items-center px-4 sm:px-6 lg:px-8'>
+      <Form method='post' className='max-w-md mx-auto basis-[70%]'>
+        <h1>{isLogin ? 'Login' : 'Signup'}</h1>
+        {data &&
+          data.errors &&
+          Object.values(data.erros.map((err) => <li key={err}>{err}</li>))}
+
+        {data && data.message && <p>{data.message}</p>}
         <div className='mb-4'>
           <label
             htmlFor='username'
@@ -57,12 +62,9 @@ const AuthForm = () => {
             {isLogin ? 'Create new user' : 'Login'}
           </Link>
         </p>
-            </Form>
-        </div>
-          <div className='flex-1'>
-            <img src='/login.svg' />
-          </div>
-        </div>
+      </Form>
+      <div className='flex-1 max-w-[550px]'>
+        <img src='/login.svg' />
       </div>
     </div>
   );

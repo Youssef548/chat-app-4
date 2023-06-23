@@ -1,4 +1,9 @@
 import { Server } from 'socket.io';
+import socketModel from '../models/socket.model.js';
+
+import sendMessage from './events/sendMessage.js';
+
+
 
 const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
 function createWsServer(app, sessionMiddleware) {
@@ -13,16 +18,33 @@ function createWsServer(app, sessionMiddleware) {
     io.use(wrap(sessionMiddleware));
 
 
-    io.on("connection", function (socket) {
+    io.on("connection", async function (socket) {
         try {
             let userId = socket.request.session.passport.user;
-            console.log(userId);
-            console.log(socket.id);
-            io.emit("helow manga", { manga: "ez" })
-        }catch(e){
+            const data = new socketModel({
+                userID: userId,
+                socketID: socket.id
+            })
+            await data.save()
+
+            socket.emit("helow manga", { manga: "ez" })
+        } catch (e) {
+            socket.disconnect()
             console.log(e);
         }
+        socket.on("disconnect", async function (reason) {
+            await socketModel.deleteOne({ socketID: socket.id })
+        })
+
+        // handel events
+        socket.on("send-message",(args) => {sendMessage(io,socket,args)})
+        
     });
+    
+    
+    // apply events
+    
+
 
 }
 
