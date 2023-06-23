@@ -29,7 +29,7 @@ class authController {
       userdata.password = password
       await userdata.save()
 
-      res.send(200);
+      res.sendStatus(200);
     } else {
       res.status(400).send({ type: "error", message: "username already taken" });
     }
