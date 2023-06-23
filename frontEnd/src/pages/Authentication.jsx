@@ -36,7 +36,12 @@ export async function action({ request }) {
     credentials: 'include',
   });
 
-  if (response.status === 422 || response.status === 401) {
+  if (
+    response.status === 422 ||
+    response.status === 401 ||
+    response.status === 400
+  ) {
+    console.log('TEST');
     return response;
   }
 
@@ -46,7 +51,6 @@ export async function action({ request }) {
 
   if (mode === 'login') {
     return redirect('/dashboard');
-
   } else if (mode === 'signup') {
     return redirect('/auth?mode=login');
   }
