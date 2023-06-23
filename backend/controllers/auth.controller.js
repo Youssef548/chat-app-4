@@ -7,7 +7,7 @@ class authController {
     passport.authenticate("local", (err, user, info) => {
       if (err) throw err
       if (!user) {
-        res.status(400).send("something wrong with username or password")
+        res.status(400).send({ errors: ["something wrong with username or password"] })
       }
       else {
         req.logIn(user, err => {
@@ -22,17 +22,15 @@ class authController {
 
   static async signupPost(req, res) {
     const { username, password } = req.body
-    const data = await userModel.findOne({ username })
-    if (data == null) {
-      const userdata = new userModel()
-      userdata.username = username
-      userdata.password = password
-      await userdata.save()
+    const userdata = new userModel({
+        username,
+        password
+      })
 
-      res.sendStatus(200);
-    } else {
-      res.status(400).send({ type: "error", message: "username already taken" });
-    }
+    await userdata.save()
+
+    res.sendStatus(200);
+
   };
 
   static async validate(req, res) {
@@ -44,7 +42,7 @@ class authController {
     res.status(200).send({ isAuthenticated: req.isAuthenticated() })
   }
   static async logout(req, res) {
-    req.logout(function(err) {
+    req.logout(function (err) {
       if (err) { return next(err); }
       res.sendStatus(200);
     });
