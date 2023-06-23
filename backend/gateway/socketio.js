@@ -4,6 +4,7 @@ import socketModel from '../models/socket.model.js';
 import sendMessage from './events/sendMessage.js';
 
 
+
 const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
 function createWsServer(app, sessionMiddleware) {
     var io = new Server(app, {
@@ -26,7 +27,7 @@ function createWsServer(app, sessionMiddleware) {
             })
             await data.save()
 
-            io.emit("helow manga", { manga: "ez" })
+            socket.emit("helow manga", { manga: "ez" })
         } catch (e) {
             socket.disconnect()
             console.log(e);
@@ -34,7 +35,9 @@ function createWsServer(app, sessionMiddleware) {
         socket.on("disconnect", async function (reason) {
             await socketModel.deleteOne({ socketID: socket.id })
         })
-        socket.on("send-message",(args) => {sendMessage(socket,args)})
+
+        // handel events
+        socket.on("send-message",(args) => {sendMessage(io,socket,args)})
         
     });
     
