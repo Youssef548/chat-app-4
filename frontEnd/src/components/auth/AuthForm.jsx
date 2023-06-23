@@ -6,6 +6,8 @@ import { Form, useSearchParams, Link, useActionData } from 'react-router-dom';
 import Button from '../app/components/Button';
 import Input from '../app/components/Input';
 
+import {LockSvg,MailSvg,UserSvg,LoginSvg} from '../svg/Svg'
+
 const AuthForm = () => {
   const [searchParams] = useSearchParams('');
   const isLogin = searchParams.get('mode') === 'login';
@@ -25,10 +27,10 @@ const AuthForm = () => {
             Object.values(data.erros.map((err) => <li key={err}>{err}</li>))}
           {data && data.message && <p>{data.message}</p>}
           <div className='mb-4'>
-            <Input label="Username" id="username" type="username" value={username} icon="/user.svg" setter={setUsername}/>
+            <Input label="Username" id="username" type="username" value={username} icon={<UserSvg />} setter={setUsername}/>
           </div>
           <div className='mb-4'>
-            <Input label="Password" id="password" type="password" value={password} icon="/lock.svg" setter={setPassword}/>
+            <Input label="Password" id="password" type="password" value={password} icon={<LockSvg />} setter={setPassword}/>
           </div>
               <Button type="submit">{isLogin ? 'Login' : 'Register'}</Button>
           <p  className='text-gray-700 my-5'>
