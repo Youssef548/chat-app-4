@@ -1,9 +1,15 @@
-import userModel from "../models/user.model.js";
+import messagesModel from "../models/messages.model.js";
 
 class friendController{
 
   static async getAllUsers(req,res){
-    // res.send(data)
+    let data = await messagesModel.aggregate([
+      { $match: { reciver: req.session.passport.user } },
+      { $group: { _id: "$sender" } },
+      { $sort: { _id: -1 } }
+    ]).exec()
+      console.log(data);
+    res.send(data)
   }
 
 
