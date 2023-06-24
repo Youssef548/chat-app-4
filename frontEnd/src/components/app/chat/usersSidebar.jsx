@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import User from '../components/User';
+import { axiosInstance } from '../../../config/axios';
+const DUMMY_DATA = [
+  {
+    id: '1',
+    username: 'John Doe',
+  },
+  {
+    id: '2',
+    username: 'John Doe',
+  },
+  {
+    id: '3',
+    username: 'John Doe',
+  },
+  {
+    id: '4',
+    username: 'John Doe',
+  },
+];
 
 export const UsersSidebar = () => {
-  // display: flex;
-  //   flex-direction: column;
-  //   gap: 30px;
+  const [friendss, setFriends] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosInstance.get('/friends');
+        console.log(res.data);
+        setFriends(res.data);
+      } catch (error) {
+        console.log('Error fetching friends:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className='cursor-pointer bg-blue-100 p-2 flex justify-between gap-5'>
-      <img
-        src='/userr.jpg'
-        alt='user-avatar'
-        className='w-[50px] h-[50px] rounded-full '
-      />
-      <div className='user-info flex flex-col gap-[30px]'>
-        <p className='username'>John Doe</p>
-        <p className='user-about text-xs'>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt
-        </p>
-      </div>
-      <p className='time'>1:55PM</p>
-    </div>
+    <>
+      {DUMMY_DATA.map((user) => {
+        const { username, id } = user;
+        return <User username={username} id={id} key={id} />;
+      })}
+    </>
   );
 };
