@@ -4,7 +4,7 @@ export const Input = ({ socket }) => {
   const [enteredMessage, setEnteredMessage] = useState('');
 
   const sendMessageHandler = () => {
-    socket.emit('send-message', { message: enteredMessage });
+    socket.emit('send-message', { data: enteredMessage });
     setEnteredMessage('');
   };
 
