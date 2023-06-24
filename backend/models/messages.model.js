@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const messagesSchema = new Schema({
-    senderId: String,
-    reciverId: String,
+    sender: String,
+    reciver: String,
     date: Date,
     data: String
 

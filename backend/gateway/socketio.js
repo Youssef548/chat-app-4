@@ -20,9 +20,9 @@ function createWsServer(app, sessionMiddleware) {
 
     io.on("connection", async function (socket) {
         try {
-            let userId = socket.request.session.passport.user;
+            let username = socket.request.session.passport.user;
             const data = new socketModel({
-                userID: userId,
+                username: username,
                 socketID: socket.id
             })
             await data.save()

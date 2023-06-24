@@ -18,10 +18,10 @@ passport.use(
     })
 )
 passport.serializeUser((user, cb) => {
-    return cb(null, user.id)
+    return cb(null, user.username)
 })
 passport.deserializeUser(async (user, cb) => {
-    let usere  = await userModel.findOne({ _id: user })
+    let usere  = await userModel.findOne({ username: user })
     return cb(null , usere)
 })
 
