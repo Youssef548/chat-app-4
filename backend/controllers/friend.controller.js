@@ -3,6 +3,9 @@ class friendController{
     let username = req.param("username")
     res.send(username);
   };
+  static async getAllUsers(req,res){
+    res.send("hellow")
+  }
 
 }
 
