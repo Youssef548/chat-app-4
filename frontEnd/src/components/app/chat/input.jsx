@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { SendSvg } from "../../svg/Svg";
 
 export const Input = ({ socket }) => {
-  const [enteredMessage, setEnteredMessage] = useState('');
+  const [enteredMessage, setEnteredMessage] = useState("");
 
   const sendMessageHandler = () => {
-    socket.emit('send-message', { data: enteredMessage });
-    setEnteredMessage('');
+    socket.emit("send-message", { data: enteredMessage });
+    setEnteredMessage("");
   };
 
   return (
     <>
-      <div className='flex gap-2 mx-2 p-2'>
-        <input
+      <div className="block">
+        {/* <input
           type='text'
           placeholder='type your msg'
           className='bg-white flex-grow border p-2 rounded-sm'
@@ -20,10 +21,26 @@ export const Input = ({ socket }) => {
         />
         <button
           className='bg-white p-2 text-black rounded-sm'
-          onClick={() => sendMessageHandler()}
+          
         >
           Icon Send Message
-        </button>
+        </button> */}
+        <div class="relative flex items-center">
+          <input
+            type="search"
+            id="search"
+            class="w-full p-6 text-sm text-gray-900
+            outline-none border-l-1"
+            placeholder={"Massage ${yourfrinde}"} />
+          <button
+            type="submit"
+            class="text-white absolute right-2.5 bottom-2.5 bg-primary outline-none 
+            font-medium rounded-full text-sm p-3"
+            onClick={() => sendMessageHandler()}
+          >
+            <SendSvg/>
+          </button>
+        </div>
       </div>
     </>
   );
