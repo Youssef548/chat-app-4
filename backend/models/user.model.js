@@ -4,7 +4,6 @@ import bcrypt from "bcrypt"
 const userSchema = new Schema({
     username:String,
     password:String,
-    friends:[String]
     
 });
 

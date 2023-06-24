@@ -3,7 +3,7 @@ import userModel from '../models/user.model.js';
 
 class authController {
   static async loginPost(req, res, next) {
-    console.log("test");
+
     passport.authenticate('local', (err, user, info) => {
       if (err) throw err;
       if (!user) {
