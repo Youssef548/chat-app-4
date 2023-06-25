@@ -135,7 +135,7 @@ paths:
       parameters:
         - name: username
           in: path
-          description: username of the user to retrieve
+          description: username of the user to check
           required: true
           schema:
             type: string
