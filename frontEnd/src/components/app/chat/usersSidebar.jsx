@@ -1,55 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import User from '../components/User';
 import { axiosInstance } from '../../../config/axios';
-const DUMMY_DATA = [
-  {
-    id: '1',
-    username: 'John Doe',
-  },
-  {
-    id: '2',
-    username: 'John Doe',
-  },
-  {
-    id: '3',
-    username: 'John Doe',
-  },
-  {
-    id: '4',
-    username: 'John Doe',
-  },
-];
+import AddFriendModal from '../components/AddFriendModal';
 
-export const UsersSidebar = () => {
-  const [friendss, setFriends] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axiosInstance.get('/friends');
-        console.log(res.data);
-        setFriends(res.data);
-      } catch (error) {
-        console.log('Error fetching friends:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+export const UsersSidebar = ({
+  socket,
+  hasFriends,
+  friends,
+  isModalOpen,
+  closeModal,
+  addFriend,
+  openModal,
+}) => {
+  const [currentId, setCurrentId] = useState(null);
 
   return (
     <>
-      {DUMMY_DATA.map((user) => {
-        const { username, id } = user;
-        return (
-          <User
-            username={username}
-            id={id}
-            key={id}
-            
-          />
-        );
-      })}
+      {!hasFriends && (
+        <button
+          onClick={openModal}
+          className='py-2 px-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none'
+        >
+          Add Friend
+        </button>
+      )}
+
+      {hasFriends &&
+        friends.map((user) => {
+          const { _id } = user;
+          return (
+            <User
+              username={_id}
+              id={_id}
+              key={_id}
+              setCurrentId={setCurrentId}
+              activeClass={`${currentId == _id ? 'active-user' : ''}`}
+            />
+          );
+        })}
+      <AddFriendModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        addFriend={addFriend}
+        socket={socket}
+      />
     </>
   );
 };

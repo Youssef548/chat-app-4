@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         action: authAction,
       },
       {
-        path: 'dashboard',
+        path: 'chat',
         element: <PrivateRoute />,
       },
     ],
