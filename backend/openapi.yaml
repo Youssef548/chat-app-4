@@ -1,0 +1,137 @@
+openapi: '3.0.2'
+info:
+  title: chat app api
+  version: '1.0'
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: auth
+  - name: friends
+
+paths:
+  /auth/login:
+    post:
+      tags:
+        - "auth"
+      description: login to the website
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username : 
+                  type:  string
+                password : 
+                  type:  string
+            example:
+              {
+                "username" :"this is my name",
+                "password" :"this sis my pasword"
+              }
+      responses:
+        "200":
+          description: user has loged in
+        "401":
+          description: some thing wrong with username or password
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                example:
+                  {
+                    "errors":["something wrong with username or password"]
+                  }
+              
+  /auth/signup:
+    post:
+      tags:
+        - "auth"
+      description: 'create new account'
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+            example:
+              {
+                "username" :"this is my name",
+                "password" :"this sis my pasword"
+              }
+      responses:
+        '200':
+          description: account created sucssefuly
+        '400':
+          description: something went wrong
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+              example:
+                {
+                  "errors":["Username must be spisified","Username must be between 4 and 12 characters","username already exists"]
+                }
+  /auth/validate:
+    get:
+      tags:
+        - "auth"
+      description: 'use it to check if user loggedin or not'
+      responses:
+        '200':
+          description: user is logged in
+        "401" :
+          description: user isn't logged in please make user login
+  /auth/logout:
+    get:
+      tags:
+        - "auth"
+      description: make user logout
+      responses:
+        '200':
+          description: OK
+  /friends:
+    get:
+      tags:
+        - "friends"
+      description: 'return all last pepol this user messaged sorted by last message date'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+              example:
+                [
+                    {
+                        "_id": "omar",
+                        "latestDate": "2023-06-25T05:54:37.580Z"
+                    },
+                    {
+                        "_id": "osama",
+                        "latestDate": "2023-06-25T05:54:34.740Z"
+                    }
+                ]
+        '401':
+          description: you are not authorized please login       
+                      
+          
+                
+
+          
+      

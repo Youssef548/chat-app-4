@@ -7,7 +7,7 @@ class authController {
     passport.authenticate('local', (err, user, info) => {
       if (err) throw err;
       if (!user) {
-        res.status(400).send({ errors: ["something wrong with username or password"] })
+        res.status(401).send({ errors: ["something wrong with username or password"] })
       } else {
         req.logIn(user, err => {
           if (err) throw err
