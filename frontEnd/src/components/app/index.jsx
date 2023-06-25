@@ -21,7 +21,14 @@ const Chat = () => {
   };
 
   const addFriend = (friend) => {
-    setFriends((prevFriends) => [...prevFriends, friend]);
+    setFriends((prevFriends) => {
+      const updatedFriends = [...prevFriends, friend];
+      updatedFriends.sort(
+        (friendA, friendB) => friendB.latestDate - friendA.latestDate
+      );
+      console.log(updatedFriends);
+      return updatedFriends;
+    });
   };
 
   const hasFriends = friends.length > 0;

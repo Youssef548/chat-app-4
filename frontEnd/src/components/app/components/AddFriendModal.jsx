@@ -19,6 +19,7 @@ const AddFriendModal = ({ isOpen, onClose, socket, addFriend }) => {
         _id: username,
         latestDate: new Date(),
       });
+
       // Clear the form
       setUsername('');
 
