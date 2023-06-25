@@ -2,6 +2,7 @@ import { Server } from 'socket.io';
 import socketModel from '../models/socket.model.js';
 
 import sendMessage from './events/sendMessage.js';
+import loadMessage from './events/loadMessage.js';
 
 
 
@@ -38,6 +39,8 @@ function createWsServer(app, sessionMiddleware) {
 
         // handel events
         socket.on("send-message",(args) => {sendMessage(io,socket,args)})
+        socket.on("load-messages",(args) => {loadMessage(io,socket,args)})
+
         
     });
     

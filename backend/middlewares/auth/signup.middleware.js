@@ -24,8 +24,8 @@ async function signupMiddleware(req, res, next) {
 
     if(!validator.isLength(username,{min:4,max:12}))
         errors.push("Username must be between 4 and 12 characters")
-    if(!validator.isLength(password,{min:4,max:12}))
-        errors.push("Password must be at least 6 characters")
+    if(!validator.isLength(password,{min:6,max:14}))
+        errors.push("Password must be between 6 and 14 characters")
 
 
 
