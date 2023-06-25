@@ -41,7 +41,14 @@ export const UsersSidebar = () => {
     <>
       {DUMMY_DATA.map((user) => {
         const { username, id } = user;
-        return <User username={username} id={id} key={id} />;
+        return (
+          <User
+            username={username}
+            id={id}
+            key={id}
+            
+          />
+        );
       })}
     </>
   );

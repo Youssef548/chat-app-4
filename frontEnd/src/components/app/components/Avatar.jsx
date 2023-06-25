@@ -2,7 +2,7 @@ import React from 'react';
 
 const Avatar = ({ src, alt }) => {
   return (
-    <img src={src} alt={alt} className='w-[70px] h-[70px] rounded-full'></img>
+    <img src={src} alt={alt} className='w-[60px] h-[60px] rounded-full'></img>
   );
 };
 
