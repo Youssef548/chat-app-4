@@ -5,7 +5,7 @@ import friendRouter from "./friend.route.js";
 const router = Router()
 
 router.use("/auth",authRouter)
-router.use("/friend",[isAuthedMiddleware],friendRouter)
+router.use("/friends",[isAuthedMiddleware],friendRouter)
 
 
 export default router
