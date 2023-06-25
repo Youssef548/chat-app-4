@@ -128,7 +128,26 @@ paths:
                     }
                 ]
         '401':
-          description: you are not authorized please login       
+          description: you are not authorized please login
+  /friends/{username}:
+    get:
+      summary: find if user exisits or not
+      parameters:
+        - name: username
+          in: path
+          description: username of the user to retrieve
+          required: true
+          schema:
+            type: string
+      tags:
+        - "friends"
+      description: 'see if spisific user exists or not'
+      responses:
+        '200':
+          description: user exists 
+          
+        '404':
+          description: user not found
                       
           
                 
