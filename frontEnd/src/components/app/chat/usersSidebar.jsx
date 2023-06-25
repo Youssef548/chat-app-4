@@ -3,64 +3,16 @@ import User from '../components/User';
 import { axiosInstance } from '../../../config/axios';
 import AddFriendModal from '../components/AddFriendModal';
 
-const DUMMY_DATA = [
-  {
-    id: '1',
-    username: 'John Doe',
-  },
-  {
-    id: '2',
-    username: 'John Doe',
-  },
-  {
-    id: '3',
-    username: 'John Doe',
-  },
-  {
-    id: '4',
-    username: 'John Doe',
-  },
-];
-
-export const UsersSidebar = () => {
+export const UsersSidebar = ({
+  socket,
+  hasFriends,
+  friends,
+  isModalOpen,
+  closeModal,
+  addFriend,
+  openModal,
+}) => {
   const [currentId, setCurrentId] = useState(null);
-  const [loading, setIsLoading] = useState(true);
-  const [friends, setFriends] = useState([]);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const addFriend = (friend) => {
-    setFriends([...friends, friend]);
-  };
-
-  const hasFriends = friends.length > 0;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axiosInstance.get('/friends');
-        setFriends(res.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log('Error fetching friends:', error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>
@@ -79,10 +31,10 @@ export const UsersSidebar = () => {
           return (
             <User
               username={_id}
-              id={id}
-              key={id}
+              id={_id}
+              key={_id}
               setCurrentId={setCurrentId}
-              activeClass={`${currentId == id ? 'active-user' : ''}`}
+              activeClass={`${currentId == _id ? 'active-user' : ''}`}
             />
           );
         })}
@@ -90,6 +42,7 @@ export const UsersSidebar = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         addFriend={addFriend}
+        socket={socket}
       />
     </>
   );

@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
+import { axiosInstance } from '../../../config/axios';
 
-const AddFriendModal = ({ isOpen, onClose }) => {
+const AddFriendModal = ({ isOpen, onClose, socket, addFriend }) => {
   const [username, setUsername] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Perform your logic to add the user friend to your account
-    // For simplicity, let's just log the username to the console
-    console.log('Username:', username);
+    try {
+      // Perform your logic to add the user friend to your account
+      const response = await axiosInstance.get(`/friends/${username}`);
+      socket.emit('send-message', {
+        data: 'Hello world',
+        receiver: username,
+      });
 
-    // Clear the form
-    setUsername('');
+      addFriend({
+        _id: username,
+        latestDate: new Date(),
+      });
+      // Clear the form
+      setUsername('');
 
-    // Close the modal
-    onClose();
+      // Close the modal
+      onClose();
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   };
 
   if (!isOpen) {

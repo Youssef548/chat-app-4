@@ -50,7 +50,7 @@ export async function action({ request }) {
   }
 
   if (mode === 'login') {
-    return redirect('/dashboard');
+    return redirect('/chat');
   } else if (mode === 'signup') {
     return redirect('/auth?mode=login');
   }
