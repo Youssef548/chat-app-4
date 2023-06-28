@@ -76,6 +76,7 @@ const Chat = () => {
           closeModal={closeModal}
           addFriend={addFriend}
           openModal={openModal}
+          hasFriends={hasFriends}
         />
         <Chatbox />
         <Input socket={socket} />

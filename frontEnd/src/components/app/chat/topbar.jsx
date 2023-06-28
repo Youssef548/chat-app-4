@@ -9,6 +9,7 @@ export const Topbar = ({
   closeModal,
   addFriend,
   openModal,
+  hasFriends,
 }) => {
   const navigate = useNavigate();
 
@@ -41,6 +42,7 @@ export const Topbar = ({
         onClose={closeModal}
         addFriend={addFriend}
         socket={socket}
+        hasFriends={hasFriends}
       />
     </div>
   );

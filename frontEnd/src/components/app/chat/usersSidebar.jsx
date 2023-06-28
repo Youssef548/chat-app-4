@@ -14,10 +14,14 @@ export const UsersSidebar = ({
 }) => {
   const [currentId, setCurrentId] = useState(null);
 
+  useEffect(() => {
+    {
+      !hasFriends && openModal();
+    }
+  }, []);
+
   return (
     <>
-      {!hasFriends && openModal()}
-
       {hasFriends &&
         friends.map((user) => {
           const { _id } = user;
@@ -31,11 +35,13 @@ export const UsersSidebar = ({
             />
           );
         })}
+
       <AddFriendModal
         isOpen={isModalOpen}
         onClose={closeModal}
         addFriend={addFriend}
         socket={socket}
+        hasFriends={hasFriends}
       />
     </>
   );
