@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { axiosInstance } from '../../../config/axios';
 
-const AddFriendModal = ({ isOpen, onClose, socket, addFriend }) => {
+const AddFriendModal = ({ isOpen, onClose, socket, addFriend, hasFriends }) => {
   const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    console.log(hasFriends);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +23,7 @@ const AddFriendModal = ({ isOpen, onClose, socket, addFriend }) => {
         _id: username,
         latestDate: new Date(),
       });
+
       // Clear the form
       setUsername('');
 
@@ -38,6 +43,7 @@ const AddFriendModal = ({ isOpen, onClose, socket, addFriend }) => {
       <div className='bg-white rounded-md p-6 w-96'>
         <h2 className='text-lg font-bold mb-4'>Add Friend</h2>
         <form onSubmit={handleSubmit}>
+          {!hasFriends && <h1>OOps you don't have a user add one plz</h1>}
           <div className='mb-4'>
             <label
               htmlFor='username'
