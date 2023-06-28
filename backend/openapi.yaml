@@ -7,6 +7,7 @@ servers:
 tags:
   - name: auth
   - name: friends
+  - name: message
 
 paths:
   /auth/login:
@@ -148,8 +149,60 @@ paths:
           
         '404':
           description: user not found
-                      
-          
+  /message:
+    get:
+      tags:
+        - "message"
+      description: ''
+      parameters:
+        - name: page
+          in: query
+          description: The number of page every page is 15 messages
+          required: true
+          schema:
+            type: integer
+        - name: username
+          in: query
+          description: the name of the user to fetch messages for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: 
+              schema:
+                type: array
+              example:
+                [
+                  {
+                    _id: new ObjectId("649c9978ede13b7848421c76"),
+                    sender: 'wwwwww',
+                    receiver: 'aaaaaa',
+                    date: "2023-06-28T20:35:04.402Z",
+                    data: 'wrqrwqrqw',
+                    __v: 0
+                  },
+                  {
+                    _id: new ObjectId("649c9973ede13b7848421c73"),
+                    sender: 'wwwwww',
+                    receiver: 'aaaaaa',
+                    date: "2023-06-28T20:34:59.027Z",
+                    data: 'wrqrwqrqw',
+                    __v: 0
+                  },
+                  {
+                    _id: new ObjectId("649c9970ede13b7848421c70"),
+                    sender: 'wwwwww',
+                    receiver: 'aaaaaa',
+                    date: "2023-06-28T20:34:56.707Z",
+                    data: 'wrqrwqrqw',
+                    __v: 0
+                  }]
+        '401':
+          description: you are not authorized please login              
+
                 
 
           

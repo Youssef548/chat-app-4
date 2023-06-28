@@ -17,6 +17,6 @@ export default async function (io, socket, args) {
         .limit(limit)
         .exec()
     console.log(messages);
-    socket.emit("load-messages",{messages})
+    socket.emit("load-messages",messages)
 
 }
