@@ -21,7 +21,7 @@ const AddFriendModal = ({ isOpen, onClose, socket, addFriend, hasFriends }) => {
 
       addFriend({
         _id: username,
-        latestDate: new Date(),
+        latestDate: new Date().toISOString(),
       });
 
       // Clear the form

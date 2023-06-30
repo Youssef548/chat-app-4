@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { CurrentUserContext } from '../../../context/CurrentUserContext';
 import User from '../components/User';
 import { axiosInstance } from '../../../config/axios';
 import AddFriendModal from '../components/AddFriendModal';
@@ -12,7 +13,9 @@ export const UsersSidebar = ({
   addFriend,
   openModal,
 }) => {
-  const [currentId, setCurrentId] = useState(null);
+  const { currentId, setCurrentId } = useContext(CurrentUserContext);
+
+  // const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
     {
