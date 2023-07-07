@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Avatar from './Avatar';
 
 import './User.css';
+import { MessageContext } from '../../../context/MessagesContext';
 
 const User = ({ id, username, setCurrentId, activeClass }) => {
+  const { setMessages } = useContext(MessageContext);
   return (
     <div
       className={`cursor-pointer transition-all hover:bg-gray-50 p-3 flex justify-around items-cente gap-2 
      ${activeClass} `}
       onClick={() => {
         setCurrentId(id);
+        setMessages([]);
       }}
     >
       <Avatar src='/userr.jpg' alt={username} />

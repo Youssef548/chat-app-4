@@ -5,30 +5,16 @@ import { Topbar } from './chat/topbar';
 import { Input } from './chat/input';
 import { axiosInstance } from '../../config/axios';
 
-import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { MessageContext } from '../../context/MessagesContext';
-
 import { io } from 'socket.io-client';
 
 const Chat = () => {
   const [friends, setFriends] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setIsLoading] = useState(true);
-  const { currentId } = useContext(CurrentUserContext);
-  const { messages, addMessage } = useContext(MessageContext);
 
   const socket = io('http://localhost:3000/', {
     withCredentials: true,
   });
-  socket.on('load-messages', (data) => console.log('test plz' + data));
-
-  useEffect(() => {
-    console.log('SHBLAAAAANGA');
-    socket.on('load-messages', (data, callback) => {
-      console.log(data);
-      callback('success');
-    });
-  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -46,7 +32,6 @@ const Chat = () => {
         const dateB = new Date(friendB.latestDate);
         return dateB - dateA;
       });
-      console.log(updatedFriends);
       return updatedFriends;
     });
   };
@@ -60,7 +45,6 @@ const Chat = () => {
         setFriends(res.data);
         setIsLoading(false);
       } catch (error) {
-        console.log('Error fetching friends:', error);
         setIsLoading(false);
       }
     };
@@ -79,6 +63,7 @@ const Chat = () => {
           socket={socket}
           hasFriends={hasFriends}
           friends={friends}
+          setFriends={setFriends}
           isModalOpen={isModalOpen}
           closeModal={closeModal}
           addFriend={addFriend}
@@ -94,7 +79,7 @@ const Chat = () => {
           openModal={openModal}
           hasFriends={hasFriends}
         />
-        <Chatbox socket={socket} />
+        <Chatbox socket={socket} friends={friends} setFriends={setFriends} />
         <Input socket={socket} setFriends={setFriends} friends={friends} />
       </div>
     </div>
