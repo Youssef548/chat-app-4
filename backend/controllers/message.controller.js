@@ -17,6 +17,7 @@ class messageController {
       .limit(limit)
       .exec();
     console.log(messages);
+    console.log(username, user, page);
     res.send(messages);
   }
 }
