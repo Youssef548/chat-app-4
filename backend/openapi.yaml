@@ -8,6 +8,7 @@ tags:
   - name: auth
   - name: friends
   - name: message
+  - name: avatar
 
 paths:
   /auth/login:
@@ -64,11 +65,15 @@ paths:
               properties:
                 username:
                   type: string
+                email:
+                  type: string
                 password:
                   type: string
+                
             example:
               {
                 "username" :"this is my name",
+                "email":"this is @email.com",
                 "password" :"this sis my pasword"
               }
       responses:
@@ -201,7 +206,42 @@ paths:
                     __v: 0
                   }]
         '401':
-          description: you are not authorized please login              
+          description: you are not authorized please login
+  /avatar:
+    post:
+      tags:
+        - "avatar"
+      description: update user avatar url for the user who is currently loged in
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+            example:
+              {
+                "image":"image url"              
+              }
+      responses:
+        '200':
+          description: OK 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                  isSet:
+                    type: boolean    
+              example:
+                {
+                  "isSet":true,
+                  "img":"img url" 
+                }           
 
                 
 

@@ -22,29 +22,3 @@ class messageController {
 }
 
 export default messageController;
-
-[
-  {
-    _id: new ObjectId("649c9978ede13b7848421c76"),
-    sender: 'wwwwww',
-    receiver: 'aaaaaa',
-    date: "2023-06-28T20:35:04.402Z",
-    data: 'wrqrwqrqw',
-    __v: 0
-  },
-  {
-    _id: new ObjectId("649c9973ede13b7848421c73"),
-    sender: 'wwwwww',
-    receiver: 'aaaaaa',
-    date: "2023-06-28T20:34:59.027Z",
-    data: 'wrqrwqrqw',
-    __v: 0
-  },
-  {
-    _id: new ObjectId("649c9970ede13b7848421c70"),
-    sender: 'wwwwww',
-    receiver: 'aaaaaa',
-    date: "2023-06-28T20:34:56.707Z",
-    data: 'wrqrwqrqw',
-    __v: 0
-  }]

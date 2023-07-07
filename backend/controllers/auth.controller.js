@@ -18,10 +18,11 @@ class authController {
   }
 
   static async signupPost(req, res) {
-    const { username, password } = req.body
+    const { username, password,email } = req.body
     const userdata = new userModel({
       username,
-      password
+      password,
+      email
     })
 
     await userdata.save()

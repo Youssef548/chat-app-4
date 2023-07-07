@@ -4,6 +4,9 @@ import bcrypt from "bcrypt"
 const userSchema = new Schema({
     username:String,
     password:String,
+    email:String,
+    isAvatarImageSet:{type:Boolean,default:false},
+    avatarImage:{type : String,default:""},
 });
 
 // Define a pre-save middleware function to hash the password
