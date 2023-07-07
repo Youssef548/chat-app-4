@@ -3,10 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import { createBrowserRouter } from 'react-router-dom';
 
-import { AuthenticationPage, HomePage, authAction } from './pages';
-
-import Register from './pages/Register';
-import Login from './pages/Login';
+import { SetAvatar, HomePage, Register, Login } from './pages';
 
 function App() {
   return (
@@ -16,6 +13,7 @@ function App() {
           <Route path='/' element={<HomePage />}></Route>
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/setAvatar' element={<SetAvatarPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
