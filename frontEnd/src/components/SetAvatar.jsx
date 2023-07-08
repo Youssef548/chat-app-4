@@ -4,6 +4,8 @@ import { Buffer } from 'buffer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
+
+import { isLoggedRoute } from '../utils/APIRoutes';
 // import {setAvatarRoute}
 
 const SetAvatar = () => {
@@ -22,9 +24,22 @@ const SetAvatar = () => {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem('chat-app-user')) {
-      navigate('/');
-    }
+    const checkIsLogged = async () => {
+      try {
+        await axios.get(`${isLoggedRoute}`);
+        navigate('/login');
+        console.log('SUCCESS');
+      } catch (e) {
+        if (e.response && e.response.status === 401) {
+          toast.error('You need to login first', toastOptions);
+          navigate('/login');
+          return;
+        }
+        console.log('There is an error in the API', e.message);
+      }
+      setIsLoading(false);
+    };
+    checkIsLogged();
   }, []);
 
   const setAvatarPicture = async () => {

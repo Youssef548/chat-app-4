@@ -20,18 +20,17 @@ const Chat = () => {
   useEffect(() => {
     const checkIsLogged = async () => {
       try {
-        await axios.get(`${isLoggedRoute}`);
-        navigate('/login');
-        console.log('SUCCESS');
+        await axios.get(`${isLoggedRoute}`, { withCredentials: true });
+        setIsLoading(false);
       } catch (e) {
         if (e.response && e.response.status === 401) {
+          console.log(e);
           toast.error('You need to login first', toastOptions);
           navigate('/login');
           return;
         }
         console.log('There is an error in the API', e.message);
       }
-      setIsLoading(false);
     };
     checkIsLogged();
   }, []);
