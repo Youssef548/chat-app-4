@@ -1,88 +1,50 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Chatbox } from './chat/chatbox';
-import { UsersSidebar } from './chat/usersSidebar';
-import { Topbar } from './chat/topbar';
-import { Input } from './chat/input';
-import { axiosInstance } from '../../config/axios';
+import { useNavigate } from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { io } from 'socket.io-client';
+import { isLoggedRoute } from '../../utils/APIRoutes';
+import axios from 'axios';
 
 const Chat = () => {
-  const [friends, setFriends] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setIsLoading] = useState(true);
-
-  const socket = io('http://localhost:3000/', {
-    withCredentials: true,
-  });
-
-  const openModal = () => {
-    setIsModalOpen(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const toastOptions = {
+    position: 'bottom-right',
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: 'dark',
   };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const addFriend = (friend) => {
-    setFriends((prevFriends) => {
-      const updatedFriends = [...prevFriends, friend];
-      updatedFriends.sort((friendA, friendB) => {
-        const dateA = new Date(friendA.latestDate);
-        const dateB = new Date(friendB.latestDate);
-        return dateB - dateA;
-      });
-      return updatedFriends;
-    });
-  };
-
-  const hasFriends = friends.length > 0;
 
   useEffect(() => {
-    const fetchData = async () => {
+    const checkIsLogged = async () => {
       try {
-        const res = await axiosInstance.get('/friends');
-        setFriends(res.data);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
+        await axios.get(`${isLoggedRoute}`);
+        navigate('/login');
+        console.log('SUCCESS');
+      } catch (e) {
+        if (e.response && e.response.status === 401) {
+          toast.error('You need to login first', toastOptions);
+          navigate('/login');
+          return;
+        }
+        console.log('There is an error in the API', e.message);
       }
+      setIsLoading(false);
     };
-
-    fetchData();
+    checkIsLogged();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div className='flex h-[90vh]'>
-      <div className='w-1/4 bg-white'>
-        <UsersSidebar
-          socket={socket}
-          hasFriends={hasFriends}
-          friends={friends}
-          setFriends={setFriends}
-          isModalOpen={isModalOpen}
-          closeModal={closeModal}
-          addFriend={addFriend}
-          openModal={openModal}
-        />
-      </div>
-      <div className='w-3/4 bg-[#e4e6eb] flex flex-col'>
-        <Topbar
-          socket={socket}
-          isModalOpen={isModalOpen}
-          closeModal={closeModal}
-          addFriend={addFriend}
-          openModal={openModal}
-          hasFriends={hasFriends}
-        />
-        <Chatbox socket={socket} friends={friends} setFriends={setFriends} />
-        <Input socket={socket} setFriends={setFriends} friends={friends} />
-      </div>
-    </div>
+    <>
+      {!isLoading && (
+        <div className='flex h-[90vh]'>
+          <ToastContainer />
+          <h1>Hello world</h1>
+        </div>
+      )}
+    </>
   );
 };
 
