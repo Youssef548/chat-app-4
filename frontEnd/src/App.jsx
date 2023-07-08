@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import { createBrowserRouter } from 'react-router-dom';
 
-import { SetAvatar, HomePage, Register, Login } from './pages';
+import { SetAvatarPage, HomePage, Register, Login } from './pages';
 
 function App() {
   return (

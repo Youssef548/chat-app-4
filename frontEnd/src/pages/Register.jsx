@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
-import { registerRoute } from '../utils/APIRoutes';
+import { loginRoute, registerRoute, isLoggedRoute } from '../utils/APIRoutes';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -16,9 +16,15 @@ const Register = () => {
   });
 
   useEffect(() => {
-    if (localStorage.getItem('chat-app-user')) {
-      navigate('/');
-    }
+    const checkIsLogged = async () => {
+      try {
+        await axios.get(`${isLoggedRoute}`);
+        navigate('/');
+      } catch (e) {
+        console.log('not logged in'); // eslint-disable-line no-console
+      }
+      checkIsLogged();
+    };
   }, []);
 
   const navigate = useNavigate();
@@ -37,13 +43,16 @@ const Register = () => {
       const { username, email, password } = values;
 
       try {
-        const { data } = await axios.post(registerRoute, {
+        await axios.post(registerRoute, {
           username,
           email,
           password,
         });
 
-        
+        await axios.post(loginRoute, {
+          username,
+          password,
+        });
 
         navigate('/');
       } catch (err) {

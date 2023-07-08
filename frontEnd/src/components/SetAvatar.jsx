@@ -41,6 +41,7 @@ const SetAvatar = () => {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
         localStorage.setItem('chat-app-user', JSON.stringify(user));
+        console.log('IAM HERE MOHAMED');
         navigate('/');
       } else {
         toast.error('Error setting avatar. Please try again.', toastOptions);

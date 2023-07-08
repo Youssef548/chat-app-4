@@ -17,7 +17,7 @@ export const Topbar = ({
 
   const logout = async () => {
     try {
-      const res = await axiosInstance.get('/auth/logout');
+      await axiosInstance.get('/auth/logout');
       navigate('/auth');
     } catch (error) {
       console.log(error);

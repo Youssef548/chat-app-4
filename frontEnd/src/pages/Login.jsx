@@ -40,12 +40,10 @@ const Login = () => {
     const { username, password } = values;
     if (handleValidation()) {
       try {
-        const { data } = await axios.post(loginRoute, {
+        await axios.post(loginRoute, {
           username,
           password,
         });
-
-        localStorage.setItem('chat-app-user', data);
 
         navigate('/');
       } catch (e) {
