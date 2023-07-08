@@ -14,7 +14,7 @@ paths:
   /auth/login:
     post:
       tags:
-        - "auth"
+        - 'auth'
       description: login to the website
       requestBody:
         required: true
@@ -23,19 +23,19 @@ paths:
             schema:
               type: object
               properties:
-                username : 
-                  type:  string
-                password : 
-                  type:  string
+                username:
+                  type: string
+                password:
+                  type: string
             example:
               {
-                "username" :"this is my name",
-                "password" :"this sis my pasword"
+                'username': 'this is my name',
+                'password': 'this sis my pasword',
               }
       responses:
-        "200":
+        '200':
           description: user has loged in
-        "401":
+        '401':
           description: some thing wrong with username or password
           content:
             application/json:
@@ -46,14 +46,12 @@ paths:
                     items:
                       type: string
                 example:
-                  {
-                    "errors":["something wrong with username or password"]
-                  }
-              
+                  { 'errors': ['something wrong with username or password'] }
+
   /auth/signup:
     post:
       tags:
-        - "auth"
+        - 'auth'
       description: 'create new account'
 
       requestBody:
@@ -69,12 +67,12 @@ paths:
                   type: string
                 password:
                   type: string
-                
+
             example:
               {
-                "username" :"this is my name",
-                "email":"this is @email.com",
-                "password" :"this sis my pasword"
+                'username': 'this is my name',
+                'email': 'this is @email.com',
+                'password': 'this sis my pasword',
               }
       responses:
         '200':
@@ -90,22 +88,27 @@ paths:
                     type: array
               example:
                 {
-                  "errors":["Username must be spisified","Username must be between 4 and 12 characters","username already exists"]
+                  'errors':
+                    [
+                      'Username must be spisified',
+                      'Username must be between 4 and 12 characters',
+                      'username already exists',
+                    ],
                 }
-  /auth/validate:
+  /auth/islogged:
     get:
       tags:
-        - "auth"
+        - 'auth'
       description: 'use it to check if user loggedin or not'
       responses:
         '200':
           description: user is logged in
-        "401" :
+        '401':
           description: user isn't logged in please make user login
   /auth/logout:
     get:
       tags:
-        - "auth"
+        - 'auth'
       description: make user logout
       responses:
         '200':
@@ -113,7 +116,7 @@ paths:
   /friends:
     get:
       tags:
-        - "friends"
+        - 'friends'
       description: 'return all last pepol this user messaged sorted by last message date'
       responses:
         '200':
@@ -124,14 +127,8 @@ paths:
                 type: array
               example:
                 [
-                    {
-                        "_id": "omar",
-                        "latestDate": "2023-06-25T05:54:37.580Z"
-                    },
-                    {
-                        "_id": "osama",
-                        "latestDate": "2023-06-25T05:54:34.740Z"
-                    }
+                  { '_id': 'omar', 'latestDate': '2023-06-25T05:54:37.580Z' },
+                  { '_id': 'osama', 'latestDate': '2023-06-25T05:54:34.740Z' },
                 ]
         '401':
           description: you are not authorized please login
@@ -146,18 +143,18 @@ paths:
           schema:
             type: string
       tags:
-        - "friends"
+        - 'friends'
       description: 'see if spisific user exists or not'
       responses:
         '200':
-          description: user exists 
-          
+          description: user exists
+
         '404':
           description: user not found
   /message:
     get:
       tags:
-        - "message"
+        - 'message'
       description: ''
       parameters:
         - name: page
@@ -176,7 +173,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json: 
+            application/json:
               schema:
                 type: array
               example:
@@ -185,32 +182,33 @@ paths:
                     _id: new ObjectId("649c9978ede13b7848421c76"),
                     sender: 'wwwwww',
                     receiver: 'aaaaaa',
-                    date: "2023-06-28T20:35:04.402Z",
+                    date: '2023-06-28T20:35:04.402Z',
                     data: 'wrqrwqrqw',
-                    __v: 0
+                    __v: 0,
                   },
                   {
                     _id: new ObjectId("649c9973ede13b7848421c73"),
                     sender: 'wwwwww',
                     receiver: 'aaaaaa',
-                    date: "2023-06-28T20:34:59.027Z",
+                    date: '2023-06-28T20:34:59.027Z',
                     data: 'wrqrwqrqw',
-                    __v: 0
+                    __v: 0,
                   },
                   {
                     _id: new ObjectId("649c9970ede13b7848421c70"),
                     sender: 'wwwwww',
                     receiver: 'aaaaaa',
-                    date: "2023-06-28T20:34:56.707Z",
+                    date: '2023-06-28T20:34:56.707Z',
                     data: 'wrqrwqrqw',
-                    __v: 0
-                  }]
+                    __v: 0,
+                  },
+                ]
         '401':
           description: you are not authorized please login
   /avatar:
     post:
       tags:
-        - "avatar"
+        - 'avatar'
       description: update user avatar url for the user who is currently loged in
       parameters: []
       requestBody:
@@ -221,13 +219,10 @@ paths:
               properties:
                 image:
                   type: string
-            example:
-              {
-                "image":"image url"              
-              }
+            example: { 'image': 'image url' }
       responses:
         '200':
-          description: OK 
+          description: OK
           content:
             application/json:
               schema:
@@ -271,4 +266,4 @@ paths:
                 
 
           
-      
+    

@@ -1,32 +1,21 @@
-import { RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import PrivateRoute from './utils/PrivateRoute';
 import { createBrowserRouter } from 'react-router-dom';
 
-import { AuthenticationPage, HomePage, authAction } from './pages';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomePage />,
-    children: [
-      {
-        path: 'auth',
-        element: <AuthenticationPage />,
-        action: authAction,
-      },
-      {
-        path: 'chat',
-        element: <PrivateRoute />,
-      },
-    ],
-  },
-]);
+import { SetAvatarPage, HomePage, Register, Login } from './pages';
 
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />}></Route>
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/setAvatar' element={<SetAvatarPage />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

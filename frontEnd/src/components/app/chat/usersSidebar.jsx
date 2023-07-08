@@ -8,6 +8,7 @@ export const UsersSidebar = ({
   socket,
   hasFriends,
   friends,
+  setFriends,
   isModalOpen,
   closeModal,
   addFriend,
@@ -22,6 +23,7 @@ export const UsersSidebar = ({
       !hasFriends && openModal();
     }
   }, []);
+
 
   return (
     <>

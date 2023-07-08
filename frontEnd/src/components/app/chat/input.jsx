@@ -13,11 +13,6 @@ export const Input = ({ socket, setFriends, friends }) => {
 
   const sendMessageHandler = () => {
     socket.emit('send-message', { data: enteredMessage, receiver: currentId });
-    socket.on('load-messages', (data) => {
-      console.log(data);
-    });
-
-    console.log('TESTTEST');
 
     addMessage({ data: enteredMessage });
 
@@ -46,13 +41,6 @@ export const Input = ({ socket, setFriends, friends }) => {
     }
   };
 
-  function loadData() {
-    socket.on('load-messages', (data) => {
-      console.log('ASHTGHLII BKA');
-      console.log(data);
-    });
-  }
-
   return (
     <>
       <div className='block'>
@@ -72,7 +60,6 @@ export const Input = ({ socket, setFriends, friends }) => {
             font-medium rounded-full text-sm p-3'
             onClick={() => {
               sendMessageHandler();
-              loadData();
             }}
           >
             <SendSvg />

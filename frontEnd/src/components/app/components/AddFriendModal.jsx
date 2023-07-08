@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { axiosInstance } from '../../../config/axios';
+import { CurrentUserContext } from '../../../context/CurrentUserContext';
 
 const AddFriendModal = ({ isOpen, onClose, socket, addFriend, hasFriends }) => {
   const [username, setUsername] = useState('');
 
-  useEffect(() => {
-    console.log(hasFriends);
-  }, []);
+  const { currentId, setCurrentId } = useContext(CurrentUserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

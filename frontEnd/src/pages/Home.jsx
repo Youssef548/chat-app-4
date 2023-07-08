@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { isLoggedRoute } from '../utils/APIRoutes';
 
-import { Outlet } from 'react-router-dom';
-
-import { MainNavigation } from '../components';
-
+import Chat from '../components/app';
 const HomePage = () => {
   return (
     <>
-      <MainNavigation />
-      <main>
-        <Outlet />
-      </main>
+      <Chat />
     </>
   );
 };
