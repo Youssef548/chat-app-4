@@ -24,5 +24,9 @@ class avatarController {
       console.log(err);
     }
   }
+  static async checkAvatar(req,res){
+    let userDate =await userModel.findOne({username:req.session.passport.user}).select({"isAvatarImageSet":1,"avatarImage":1,"_id":0})
+    res.send(userDate)
+  }
 }
 export default avatarController;

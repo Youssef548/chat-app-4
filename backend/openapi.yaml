@@ -242,7 +242,32 @@ paths:
                   "isSet":true,
                   "img":"img url" 
                 }           
-
+        '401':
+          description: unauthorized
+    get:
+      tags:
+        - "avatar"
+      description: retrive data about 
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isAvatarImageSet:
+                    type: boolean
+                  avatarImage:
+                    type: string
+                example:
+                  {
+                      "isAvatarImageSet": true,
+                      "avatarImage": "https://urltoimg.png"
+                  }
+        '401':
+          description: unauthorized
                 
 
           

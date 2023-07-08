@@ -3,6 +3,7 @@ import avatarController from "../controllers/avatar.controller.js";
 const avatarRouter = Router()
 
 avatarRouter.post("",avatarController.setAvatar)
+avatarRouter.get("",avatarController.checkAvatar)
 
 
 
