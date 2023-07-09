@@ -1,8 +1,6 @@
 import validator from "validator";
 import userModel from "../../models/user.model.js";
 
-
-
 async function signupMiddleware(req, res, next) {
     let errors = []
     const { username ,password ,email} = req.body
