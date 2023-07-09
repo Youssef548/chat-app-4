@@ -31,7 +31,6 @@ class friendController{
     res.send(data)
   }
 
-
   static async userExists(req,res){
     let {username} = req.params
     let data  = await userModel.findOne({username})

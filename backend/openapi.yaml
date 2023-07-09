@@ -9,6 +9,7 @@ tags:
   - name: friends
   - name: message
   - name: avatar
+  - name: users
 
 paths:
   /auth/login:
@@ -261,6 +262,39 @@ paths:
                       "isAvatarImageSet": true,
                       "avatarImage": "https://urltoimg.png"
                   }
+        '401':
+          description: unauthorized
+  /users:
+    get:
+      tags:
+        - "users"
+      description: fetch all users in the database except current loged user
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+              example:
+                [
+                  {
+                      "username": "manga",
+                      "email": "manga@gmail.com",
+                      "avatarImage": "mangaimg.png"
+                  },
+                  {
+                      "username": "osama",
+                      "email": "osama@gmail.com",
+                      "avatarImage": "osama.png"
+                  },
+                  {
+                      "username": "marawan",
+                      "email": "marawan@gmail.com",
+                      "avatarImage": "marawan.png"
+                  }
+                ]
         '401':
           description: unauthorized
                 
