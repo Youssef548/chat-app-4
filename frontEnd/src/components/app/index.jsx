@@ -10,7 +10,10 @@ import axios from 'axios';
 const Chat = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [userImage, setUserImage] = useState(null);
+  const [currentUser, setCurrentUser] = useState(undefined);
+
   const navigate = useNavigate();
+
   const toastOptions = {
     position: 'bottom-right',
     autoClose: 8000,
@@ -19,10 +22,12 @@ const Chat = () => {
     theme: 'dark',
   };
 
+  //Check IsLoggedIn
   useEffect(() => {
     const checkIsLogged = async () => {
       try {
         await axios.get(`${isLoggedRoute}`, { withCredentials: true });
+
         setIsLoading(false);
       } catch (e) {
         if (e.response && e.response.status === 401) {
@@ -37,6 +42,16 @@ const Chat = () => {
     checkIsLogged();
   }, []);
 
+  // setCurrent user
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      setCurrentUser(JSON.parse(user));
+    }
+  }, []);
+
+  // Check is user has image or not
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('user'));
 
@@ -68,19 +83,14 @@ const Chat = () => {
 
   return (
     <>
-      {userImage !== null && (
-        <img
-          src={`data:image/svg+xml;base64,${userImage}`}
-          className='rounded-full w-20 h-20 mx-auto mb-2'
-          alt='image ya 5oana'
-        />
-      )}
-      {!isLoading && (
-        <div className='flex h-[90vh]'>
-          <ToastContainer />
-          <h1>Hello world</h1>
-        </div>
-      )}
+      <div className='container'>
+        {/* <Contacts contacts={contacts} changeChat={handleChatChange} />
+        {currentChat === undefined ? (
+          <Welcome />
+        ) : (
+          <ChatContainer currentChat={currentChat} socket={socket} />
+        )} */}
+      </div>
     </>
   );
 };
