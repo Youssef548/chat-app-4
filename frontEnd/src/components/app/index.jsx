@@ -11,7 +11,7 @@ const Chat = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [userImage, setUserImage] = useState(null);
   const [currentUser, setCurrentUser] = useState(undefined);
-
+  const [contacts, setContacts] = useState([]);
   const navigate = useNavigate();
 
   const toastOptions = {
