@@ -55,6 +55,7 @@ const Login = () => {
             withCredentials: true,
           }
         );
+        localStorage.setItem('user', JSON.stringify({ username }));
 
         navigate('/');
       } catch (e) {

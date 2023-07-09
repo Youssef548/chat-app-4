@@ -1,9 +1,9 @@
 import React from 'react';
-import SetAvatar from '../components/SetAvatar';
+import ProfilePic from '../components/ProfilePic';
 const SetAvatarPage = () => {
   return (
     <>
-      <SetAvatar />
+      <ProfilePic />
     </>
   );
 };
