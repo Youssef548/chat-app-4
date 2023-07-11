@@ -118,7 +118,11 @@ const Chat = () => {
         <div className='container h-[85vh] w-[85] bg-[#00000076] flex flex-row'>
           <Contacts contacts={contacts} changeChat={handleChatChange} />
           <div className='w-[70%]'>
-            {currentChat === undefined ? <Welcome /> : <ChatContainer />}
+            {currentChat === undefined ? (
+              <Welcome />
+            ) : (
+              <ChatContainer currentChat={currentChat} />
+            )}
           </div>
         </div>
       </div>
