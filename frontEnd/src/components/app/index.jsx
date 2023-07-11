@@ -2,8 +2,15 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Contacts from './components/Contacts';
+import Welcome from './components/Welcome';
+import ChatContainer from './components/ChatContainer';
 
-import { isLoggedRoute, getAvatarRoute } from '../../utils/APIRoutes';
+import {
+  isLoggedRoute,
+  getAvatarRoute,
+  getContactsRoute,
+} from '../../utils/APIRoutes';
 
 import axios from 'axios';
 
@@ -12,6 +19,8 @@ const Chat = () => {
   const [userImage, setUserImage] = useState(null);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [contacts, setContacts] = useState([]);
+  const [currentChat, setCurrentChat] = useState(undefined);
+
   const navigate = useNavigate();
 
   const toastOptions = {
@@ -21,6 +30,21 @@ const Chat = () => {
     draggable: true,
     theme: 'dark',
   };
+
+  // Get Contacts
+  useEffect(() => {
+    console.log('HEY RUN PLZ');
+    const fetchContacts = async () => {
+      if (currentUser) {
+        const users = await axios.get(getContactsRoute, {
+          withCredentials: true,
+        });
+        setContacts(users.data);
+      }
+    };
+
+    fetchContacts();
+  }, [currentUser]);
 
   //Check IsLoggedIn
   useEffect(() => {
@@ -48,6 +72,10 @@ const Chat = () => {
     const user = localStorage.getItem('user');
     if (user) {
       setCurrentUser(JSON.parse(user));
+    } else {
+      // const fetchUser = async () => {
+      // }
+      return;
     }
   }, []);
 
@@ -64,13 +92,13 @@ const Chat = () => {
         localStorage.setItem(
           'user',
           JSON.stringify({
-            username: data.username,
+            username: user.data.username,
             img: user.data.avatarImage,
           })
         );
-        console.log('TEST');
       } else {
         navigate('/setavatar');
+        console.log('setavatar');
       }
     };
 
@@ -81,15 +109,18 @@ const Chat = () => {
     }
   }, []);
 
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  };
   return (
     <>
-      <div className='container'>
-        {/* <Contacts contacts={contacts} changeChat={handleChatChange} />
-        {currentChat === undefined ? (
-          <Welcome />
-        ) : (
-          <ChatContainer currentChat={currentChat} socket={socket} />
-        )} */}
+      <div className='flex h-screen w-screen flex-col justify-center gap-[1rem] items-center bg-[#131324]'>
+        <div className='container h-[85vh] w-[85] bg-[#00000076] flex flex-row'>
+          <Contacts contacts={contacts} changeChat={handleChatChange} />
+          <div className='w-[70%]'>
+            {currentChat === undefined ? <Welcome /> : <ChatContainer />}
+          </div>
+        </div>
       </div>
     </>
   );

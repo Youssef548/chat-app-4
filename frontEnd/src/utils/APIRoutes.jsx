@@ -5,3 +5,4 @@ export const validate = `${host}/auth/validate`;
 export const isLoggedRoute = `${host}/auth/islogged`;
 export const setAvatarRoute = `${host}/avatar`;
 export const getAvatarRoute = `${host}/avatar`;
+export const getContactsRoute = `${host}/users`;
