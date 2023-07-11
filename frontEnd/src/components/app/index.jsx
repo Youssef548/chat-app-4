@@ -86,13 +86,12 @@ const Chat = () => {
     const isUserHaveImage = async () => {
       // Check user have image or not
       const user = await axios.get(getAvatarRoute, { withCredentials: true });
-
       if (user.data.avatarImage) {
         setUserImage(user.data.avatarImage);
         localStorage.setItem(
           'user',
           JSON.stringify({
-            username: user.data.username,
+            username: data.username,
             img: user.data.avatarImage,
           })
         );
@@ -112,6 +111,7 @@ const Chat = () => {
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
+
   return (
     <>
       <div className='flex h-screen w-screen flex-col justify-center gap-[1rem] items-center bg-[#131324]'>
