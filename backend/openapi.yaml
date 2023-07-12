@@ -232,18 +232,14 @@ paths:
                   image:
                     type: string
                   isSet:
-                    type: boolean    
-              example:
-                {
-                  "isSet":true,
-                  "img":"img url" 
-                }           
+                    type: boolean
+              example: { 'isSet': true, 'img': 'img url' }
         '401':
           description: unauthorized
     get:
       tags:
-        - "avatar"
-      description: retrive data about 
+        - 'avatar'
+      description: retrive data about
       parameters: []
       responses:
         '200':
@@ -259,15 +255,15 @@ paths:
                     type: string
                 example:
                   {
-                      "isAvatarImageSet": true,
-                      "avatarImage": "https://urltoimg.png"
+                    'isAvatarImageSet': true,
+                    'avatarImage': 'https://urltoimg.png',
                   }
         '401':
           description: unauthorized
   /users:
     get:
       tags:
-        - "users"
+        - 'users'
       description: fetch all users in the database except current loged user
       parameters: []
       responses:
@@ -280,24 +276,20 @@ paths:
               example:
                 [
                   {
-                      "username": "manga",
-                      "email": "manga@gmail.com",
-                      "avatarImage": "mangaimg.png"
+                    'username': 'manga',
+                    'email': 'manga@gmail.com',
+                    'avatarImage': 'mangaimg.png',
                   },
                   {
-                      "username": "osama",
-                      "email": "osama@gmail.com",
-                      "avatarImage": "osama.png"
+                    'username': 'osama',
+                    'email': 'osama@gmail.com',
+                    'avatarImage': 'osama.png',
                   },
                   {
-                      "username": "marawan",
-                      "email": "marawan@gmail.com",
-                      "avatarImage": "marawan.png"
-                  }
+                    'username': 'marawan',
+                    'email': 'marawan@gmail.com',
+                    'avatarImage': 'marawan.png',
+                  },
                 ]
         '401':
           description: unauthorized
-                
-
-          
-    

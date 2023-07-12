@@ -10,6 +10,6 @@ const router = Router();
 router.use('/auth', authRouter);
 router.use('/friends', [isAuthedMiddleware], friendRouter);
 router.use('/message', [isAuthedMiddleware], messageRouter);
-router.use("/avatar",[isAuthedMiddleware],avatarRouter)
-router.use("/users",[isAuthedMiddleware],usersRouter)
+router.use('/avatar', [isAuthedMiddleware], avatarRouter);
+router.use('/users', [isAuthedMiddleware], usersRouter);
 export default router;

@@ -1,10 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import Logout from './Logout';
 import ChatInput from './ChatInput';
 import Messages from './Messages';
-const ChatContainer = ({ currentChat }) => {
+import axios from 'axios';
+import { sneMessageRoute } from '../../../utils/APIRoutes';
+
+const ChatContainer = ({ currentChat, currentUser }) => {
   const handleSendMsg = async (msg) => {
     // send message to backend
+    await axios.post(
+      `${sendMessageRoute}`,
+      {
+        to: currentChat._id,
+        message: msg,
+      },
+      { withCredentials: true }
+    );
   };
   return (
     <div className='chat-container pt-4 flex flex-col h-[100%]'>

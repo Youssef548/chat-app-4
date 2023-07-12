@@ -7,3 +7,4 @@ export const setAvatarRoute = `${host}/avatar`;
 export const getAvatarRoute = `${host}/avatar`;
 export const getContactsRoute = `${host}/users`;
 export const logoutRoute = `${host}/auth/logout`;
+export const sendMessageRoute = `${host}/message/send`;
