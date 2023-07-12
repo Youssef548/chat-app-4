@@ -20,6 +20,12 @@ class messageController {
     console.log(username, user, page);
     res.send(messages);
   }
+  static async send(req,res){
+    let {to , message} = req.body
+    let data = new messagesModel({sender: req.session.passport.user, receiver:to,data:message})
+    await data.save()
+    res.sendStatus(200)
+  }
 }
 
 export default messageController;

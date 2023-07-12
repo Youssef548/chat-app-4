@@ -206,6 +206,7 @@ paths:
                 ]
         '401':
           description: you are not authorized please login
+
   /avatar:
     post:
       tags:
@@ -291,5 +292,27 @@ paths:
                     'avatarImage': 'marawan.png',
                   },
                 ]
+        '401':
+          description: unauthorized
+  /message/send:
+    post:
+      tags:
+        - 'message'
+      description: send message to spisific user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                message:
+                  type: string
+            example: { 'to': 'mohamed', 'message': 'hellow' }
+
+      responses:
+        '200':
+          description: OK
         '401':
           description: unauthorized
